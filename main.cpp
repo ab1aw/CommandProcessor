@@ -10,8 +10,12 @@ public:
     A1() {
       // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
       EventManager *myEventManager = EventManager::Instance();
-      printf("createEvent(testEvent-B1)\n");
-      myEventManager->createEvent("testEvent-B1");
+
+      printf("createEvent(testEvent-B1a)\n");
+      myEventManager->createEvent("testEvent-B1a");
+
+      printf("createEvent(testEvent-B1b)\n");
+      myEventManager->createEvent("testEvent-B1b");
     };
   };
 
@@ -22,11 +26,12 @@ public:
     myEventManager->createEvent("testEvent-B");
   }
   
-  void fireEvent() {
+  void fireEvents() {
     // Fire the event and all the subscribed class methods will get called.
     EventManager *myEventManager = EventManager::Instance();
     myEventManager->execute("testEvent-B");
-    myEventManager->execute("testEvent-B1");
+    myEventManager->execute("testEvent-B1a");
+    myEventManager->execute("testEvent-B1b");
   }
 
   A1 MyA1;
@@ -35,19 +40,40 @@ public:
 class B {
 public:
 
-  class B1
+  class CSomeBaseClass
+  {
+  };
+  
+  class B1a : CSomeBaseClass
   {
     public:
-    void listenerB1() {
-      printf("Listener of B1 called\n");
+    void listenerB1a() {
+      printf("Listener of B1a called\n");
     };
 
     void attachToEvent() {
       // When testEvent is called the listener method of this class will get called.
       EventManager *myEventManager = EventManager::Instance();
 
-      printf("subscribe(testEvent-B1)\n");
-      myEventManager->subscribe("testEvent-B1", this, &B::B1::listenerB1);
+      printf("subscribe(testEvent-B1a)\n");
+      myEventManager->subscribe("testEvent-B1a", this, &B::B1a::listenerB1a);
+    }
+  };
+
+
+  class B1b : CSomeBaseClass
+  {
+    public:
+    void listenerB1b() {
+      printf("Listener of B1b called\n");
+    };
+
+    void attachToEvent() {
+      // When testEvent is called the listener method of this class will get called.
+      EventManager *myEventManager = EventManager::Instance();
+
+      printf("subscribe(testEvent-B1b)\n");
+      myEventManager->subscribe("testEvent-B1b", this, &B::B1b::listenerB1b);
     }
   };
   
@@ -63,10 +89,12 @@ public:
     printf("subscribe(testEvent-B)\n");
     myEventManager->subscribe("testEvent-B", this, &B::listenerB);
     
-    MyB1.attachToEvent();
+    MyB1a.attachToEvent();
+    MyB1b.attachToEvent();
   }
 
-  B1 MyB1;
+  B1a MyB1a;
+  B1b MyB1b;
 };
 
 int main() {
@@ -74,7 +102,7 @@ int main() {
   B *obj1 = new B;
   
   obj1->attachToEvent();
-  obj0->fireEvent();
+  obj0->fireEvents();
   
   return 0;
 }

@@ -21,7 +21,7 @@ using namespace std;
 class EventHandlerBase
 {
   public:
-    virtual void execute(std::string &arg) = 0;
+    virtual void execute (std::string &arg) = 0;
 };
 
 // Event Handler Class : Handles Callback
@@ -29,7 +29,7 @@ template <typename Class>
 class EventHandler : public EventHandlerBase
 {
     // Defining type for function pointer
-    typedef void (Class::*_fptr) (std::string &arg);
+    typedef void (Class::*_fptr) ( std::string &arg);
 
   public:
     // Object of the Listener
@@ -46,14 +46,14 @@ class EventHandler : public EventHandlerBase
       argument = "";
     }
 
-    EventHandler (Class *obj, _fptr func, std::string &arg)
+    EventHandler (Class *obj, _fptr func,  std::string &arg)
     {
       object = obj;
       function = func;
       argument = arg;
     }
 
-    void execute(std::string &arg)
+    void execute ( std::string &arg)
     {
       (object->*function) (arg);
     }
@@ -69,24 +69,24 @@ class Event
   public:
 
     template <typename Class>
-    void addListener (Class *obj, void (Class::*func) (std::string &arg) )
+    void addListener (Class *obj, void (Class::*func) ( std::string &arg) )
     {
       handlers[count] = new EventHandler<Class> (obj, func);
       count++;
     }
 
     template <typename Class>
-    void addListener (Class *obj, void (Class::*func) (std::string &arg), std::string &arg)
+    void addListener (Class *obj, void (Class::*func) ( std::string &arg),  std::string &arg)
     {
       handlers[count] = new EventHandler<Class> (obj, func, arg);
       count++;
     }
 
-    void execute(std::string &arg)
+    void execute ( std::string &arg)
     {
       for (EventHandlerMap::iterator it = handlers.begin(); it != handlers.end(); ++it)
       {
-        it->second->execute(arg);
+        it->second->execute (arg);
       }
     }
 
@@ -168,7 +168,7 @@ class EventManager
       return false;
     }
 
-    void execute (string name, std::string &arg)
+    void execute ( string name)
     {
       for (vector<EventType>::iterator it = _events.begin(); it != _events.end(); ++it)
       {
@@ -176,7 +176,21 @@ class EventManager
 
         if (e.name.compare (name) == 0)
         {
-          e.event->execute(arg);
+          static std::string dummy ("");
+          e.event->execute (dummy);
+        }
+      }
+    }
+
+    void execute ( string name, std::string &arg)
+    {
+      for (vector<EventType>::iterator it = _events.begin(); it != _events.end(); ++it)
+      {
+        EventType e = *it;
+
+        if (e.name.compare (name) == 0)
+        {
+          e.event->execute (arg);
         }
       }
     }

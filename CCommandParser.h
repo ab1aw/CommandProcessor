@@ -22,7 +22,7 @@ class CCommandParser
       public:
         COptionOne() {};
         virtual ~COptionOne() {};
-        void listenerCOptionOne(std::string &arg);
+        void listenerCOptionOne (std::string &arg);
         void Add();
     };
 
@@ -32,18 +32,18 @@ class CCommandParser
       public:
         COptionTwo() {};
         virtual ~COptionTwo() {};
-        void listenerCOptionTwo(std::string &arg);
+        void listenerCOptionTwo (std::string &arg);
         void Add();
     };
 
-    void Exit(std::string &arg);
-    void Help(std::string &arg);
-    void List(std::string &arg);
-    void DataItems(std::string &arg);
-    void Request(std::string &arg);
-    void Elements(std::string &arg);
+    void Exit (std::string &arg);
+    void Help (std::string &arg);
+    void List (std::string &arg);
+    void DataItems (std::string &arg);
+    void Request (std::string &arg);
+    void Elements (std::string &arg);
 
-    void AddOptions(void);
+    void AddOptions (void);
 
     CCommandParser();
     virtual ~CCommandParser() {};

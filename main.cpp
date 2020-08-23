@@ -27,6 +27,12 @@ A::A1::A1()
   printf ("createEvent(elements)\n");
   myEventManager->createEvent ("elements");
 
+  printf ("createEvent(-F)\n");
+  myEventManager->createEvent ("-F");
+
+  printf ("createEvent(-D)\n");
+  myEventManager->createEvent ("-D");
+
 };
 
 A::A()
@@ -59,12 +65,18 @@ void A::fireEvents()
 
   parameter = "argument six";
   myEventManager->execute ("elements", parameter);
+
+  parameter = "argument seven";
+  myEventManager->execute ("-F", parameter);
+
+  parameter = "argument eight";
+  myEventManager->execute ("-D", parameter);
 }
 
 
-void CCommandParser::COptionOne::listenerCOptionOne(std::string &arg)
+void CCommandParser::COptionOne::listenerCOptionOne (std::string &arg)
 {
-  printf ("Listener of COptionOne called\n");
+  printf ("Listener of -F called w/ arg: <%s>\n\n", arg.c_str() );
 }
 
 void CCommandParser::COptionOne::Add()
@@ -72,14 +84,14 @@ void CCommandParser::COptionOne::Add()
   // When testEvent is called the listener method of this class will get called.
   EventManager *myEventManager = EventManager::Instance();
 
-  printf ("subscribe(testEvent-COptionOne)\n");
-  myEventManager->subscribe ("testEvent-COptionOne", this, &CCommandParser::COptionOne::listenerCOptionOne);
+  printf ("subscribe(-F)\n");
+  myEventManager->subscribe ("-F", this, &CCommandParser::COptionOne::listenerCOptionOne);
 }
 
 
-void CCommandParser::COptionTwo::listenerCOptionTwo(std::string &arg)
+void CCommandParser::COptionTwo::listenerCOptionTwo (std::string &arg)
 {
-  printf ("Listener of COptionTwo called\n");
+  printf ("Listener of -D called w/ arg: <%s>\n\n", arg.c_str() );
 }
 
 void CCommandParser::COptionTwo::Add()
@@ -87,8 +99,8 @@ void CCommandParser::COptionTwo::Add()
   // When testEvent is called the listener method of this class will get called.
   EventManager *myEventManager = EventManager::Instance();
 
-  printf ("subscribe(testEvent-COptionTwo)\n");
-  myEventManager->subscribe ("testEvent-COptionTwo", this, &CCommandParser::COptionTwo::listenerCOptionTwo);
+  printf ("subscribe(-D)\n");
+  myEventManager->subscribe ("-D", this, &CCommandParser::COptionTwo::listenerCOptionTwo);
 }
 
 

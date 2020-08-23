@@ -75,14 +75,28 @@ void CInputParser::listCmdOptions (void) const
 
   std::cout << "void CInputParser::listCmdOptions (void) const" << std::endl;
 
+  // Fire the event and all the subscribed class methods will get called.
+  EventManager *myEventManager = EventManager::Instance();
+
   for (itr = this->tokens.begin(), itr++; itr != this->tokens.end(); itr++)
   {
     std::cout << "Attempt to execute: " << *itr << std::endl;
 
-    // Fire the event and all the subscribed class methods will get called.
-    EventManager *myEventManager = EventManager::Instance();
-    
-    std::string parameter = "some argument";
-    myEventManager->execute (*itr, parameter);
+    std::vector<std::string>::const_iterator command = itr;
+
+    if ( ( (*itr).front() == '-') && (++itr != this->tokens.end() ) )
+    {
+      printf ("myEventManager->execute (%s, %s);\n", (*command).c_str(), (*itr).c_str() );
+      myEventManager->execute (*command, (std::string &) *itr);
+    }
+    else
+    {
+      std::string parameter = "empty argument";
+      printf ("myEventManager->execute (%s, %s);\n", (*command).c_str(), parameter.c_str() );
+      myEventManager->execute (*itr, parameter);
+    }
   }
+
+  itr = this->tokens.begin();
+  myEventManager->execute (*itr);
 }

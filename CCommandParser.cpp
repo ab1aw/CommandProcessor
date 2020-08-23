@@ -3,37 +3,37 @@
 #include "main.h"
 
 
-void CCommandParser::Exit(std::string &arg)
+void CCommandParser::Exit (std::string &arg)
 {
-  printf ("CCommandParser Exit invoked\n");
+  printf ("CCommandParser Exit invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::Help(std::string &arg)
+void CCommandParser::Help (std::string &arg)
 {
-  printf ("CCommandParser Help invoked\n");
+  printf ("CCommandParser Help invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::List(std::string &arg)
+void CCommandParser::List (std::string &arg)
 {
-  printf ("CCommandParser List invoked\n");
+  printf ("CCommandParser List invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::DataItems(std::string &arg)
+void CCommandParser::DataItems (std::string &arg)
 {
-  printf ("CCommandParser DataItems invoked\n");
+  printf ("CCommandParser DataItems invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::Request(std::string &arg)
+void CCommandParser::Request (std::string &arg)
 {
-  printf ("CCommandParser Request invoked\n");
+  printf ("CCommandParser Request invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::Elements(std::string &arg)
+void CCommandParser::Elements (std::string &arg)
 {
-  printf ("CCommandParser Elements invoked\n");
+  printf ("CCommandParser Elements invoked w/ arg <%s>\n\n", arg.c_str() );
 }
 
-void CCommandParser::AddOptions(void)
+void CCommandParser::AddOptions (void)
 {
   MyCOptionOne.Add();
   MyCOptionTwo.Add();

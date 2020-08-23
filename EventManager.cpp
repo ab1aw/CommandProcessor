@@ -8,7 +8,5 @@
 
 #include "EventManager.h"
 
-namespace Mage {
-#define TEMPLATE template <typename Class> 
-    EventManager* EventManager::_Instance;
-}
+#define TEMPLATE template <typename Class>
+EventManager* EventManager::_Instance;

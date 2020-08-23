@@ -1,5 +1,6 @@
 
 #include "CInputParser.h"
+#include "EventManager.h"
 
 
 
@@ -66,6 +67,24 @@ bool CInputParser::cmdOptionExists (const std::string &option) const
   return std::find (this->tokens.begin(), this->tokens.end(), option)
          != this->tokens.end();
 }
+
+
+void CInputParser::listCmdOptions (void) const
+{
+  std::vector<std::string>::const_iterator itr;
+
+  std::cout << "void CInputParser::listCmdOptions (void) const" << std::endl;
+
+  for (itr = this->tokens.begin(), itr++; itr != this->tokens.end(); itr++)
+  {
+    std::cout << *itr << std::endl;
+
+    // Fire the event and all the subscribed class methods will get called.
+    EventManager *myEventManager = EventManager::Instance();
+    myEventManager->execute (*itr);
+  }
+}
+
 
 #if 0
 int main (int argc, char **argv)

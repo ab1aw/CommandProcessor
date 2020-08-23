@@ -29,25 +29,33 @@ template <typename Class>
 class EventHandler : public EventHandlerBase
 {
     // Defining type for function pointer
-    typedef void (Class::*_fptr) (void);
-
-
+    typedef void (Class::*_fptr) (std::string &arg);
 
   public:
     // Object of the Listener
     Class *object;
     // Function for callback
     _fptr function;
+    // Optional argument for the function.
+    std::string argument;
 
     EventHandler (Class *obj, _fptr func)
     {
       object = obj;
       function = func;
+      argument = "";
+    }
+
+    EventHandler (Class *obj, _fptr func, std::string &arg)
+    {
+      object = obj;
+      function = func;
+      argument = arg;
     }
 
     void execute()
     {
-      (object->*function) ();
+      (object->*function) (argument);
     }
 };
 
@@ -61,9 +69,16 @@ class Event
   public:
 
     template <typename Class>
-    void addListener (Class *obj, void (Class::*func) (void) )
+    void addListener (Class *obj, void (Class::*func) (std::string &arg) )
     {
       handlers[count] = new EventHandler<Class> (obj, func);
+      count++;
+    }
+
+    template <typename Class>
+    void addListener (Class *obj, void (Class::*func) (std::string &arg), std::string &arg)
+    {
+      handlers[count] = new EventHandler<Class> (obj, func, arg);
       count++;
     }
 
@@ -120,7 +135,7 @@ class EventManager
     }
 
     template <typename Class>
-    bool subscribe (string name, Class *obj, void (Class::*func) (void) )
+    bool subscribe (string name, Class *obj, void (Class::*func) (std::string &arg) )
     {
       for (vector<EventType>::iterator it = _events.begin(); it != _events.end(); ++it)
       {
@@ -129,6 +144,23 @@ class EventManager
         if (e.name.compare (name) == 0)
         {
           e.event->addListener (obj, func);
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    template <typename Class>
+    bool subscribe (string name, Class *obj, void (Class::*func) (void), std::string &arg)
+    {
+      for (vector<EventType>::iterator it = _events.begin(); it != _events.end(); ++it)
+      {
+        EventType e = *it;
+
+        if (e.name.compare (name) == 0)
+        {
+          e.event->addListener (obj, func, arg);
           return true;
         }
       }

@@ -25,6 +25,8 @@ class CInputParser
 
     bool cmdOptionExists (const std::string &option) const;
 
+    void listCmdOptions (void) const;
+
   private:
     std::vector <std::string> tokens;
 };

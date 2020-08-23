@@ -3,37 +3,37 @@
 #include "main.h"
 
 
-void CCommandParser::Exit()
+void CCommandParser::Exit(std::string &arg)
 {
   printf ("CCommandParser Exit invoked\n");
 }
 
-void CCommandParser::Help()
+void CCommandParser::Help(std::string &arg)
 {
   printf ("CCommandParser Help invoked\n");
 }
 
-void CCommandParser::List()
+void CCommandParser::List(std::string &arg)
 {
   printf ("CCommandParser List invoked\n");
 }
 
-void CCommandParser::DataItems()
+void CCommandParser::DataItems(std::string &arg)
 {
   printf ("CCommandParser DataItems invoked\n");
 }
 
-void CCommandParser::Request()
+void CCommandParser::Request(std::string &arg)
 {
   printf ("CCommandParser Request invoked\n");
 }
 
-void CCommandParser::Elements()
+void CCommandParser::Elements(std::string &arg)
 {
   printf ("CCommandParser Elements invoked\n");
 }
 
-void CCommandParser::AddOptions()
+void CCommandParser::AddOptions(void)
 {
   MyCOptionOne.Add();
   MyCOptionTwo.Add();

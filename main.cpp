@@ -51,7 +51,7 @@ void A::fireEvents()
 }
 
 
-void CCommandParser::COptionOne::listenerCOptionOne()
+void CCommandParser::COptionOne::listenerCOptionOne(std::string &arg)
 {
   printf ("Listener of COptionOne called\n");
 }
@@ -66,7 +66,7 @@ void CCommandParser::COptionOne::Add()
 }
 
 
-void CCommandParser::COptionTwo::listenerCOptionTwo()
+void CCommandParser::COptionTwo::listenerCOptionTwo(std::string &arg)
 {
   printf ("Listener of COptionTwo called\n");
 }
@@ -92,6 +92,8 @@ int main()
   while (true)
   {
     CInputParser input;
+
+    input.listCmdOptions();
 
     if (input.cmdOptionExists ("-h") || input.cmdOptionExists ("help") )
     {

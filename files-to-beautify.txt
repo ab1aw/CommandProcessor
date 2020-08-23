@@ -2,3 +2,8 @@ EventManager.cpp
 EventManager.h
 main.cpp
 main.h
+CCommandParser.cpp
+CCommandParser.h
+CInputParser.cpp
+CInputParser.h
+

@@ -42,12 +42,23 @@ void A::fireEvents()
   // Fire the event and all the subscribed class methods will get called.
   EventManager *myEventManager = EventManager::Instance();
 
-  myEventManager->execute ("exit");
-  myEventManager->execute ("help");
-  myEventManager->execute ("list");
-  myEventManager->execute ("dataitems");
-  myEventManager->execute ("request");
-  myEventManager->execute ("elements");
+  std::string parameter = "argument one";
+  myEventManager->execute ("exit", parameter);
+
+  parameter = "argument two";
+  myEventManager->execute ("help", parameter);
+
+  parameter = "argument three";
+  myEventManager->execute ("list", parameter);
+
+  parameter = "argument four";
+  myEventManager->execute ("dataitems", parameter);
+
+  parameter = "argument five";
+  myEventManager->execute ("request", parameter);
+
+  parameter = "argument six";
+  myEventManager->execute ("elements", parameter);
 }
 
 

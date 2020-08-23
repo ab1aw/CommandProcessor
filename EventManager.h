@@ -21,7 +21,7 @@ using namespace std;
 class EventHandlerBase
 {
   public:
-    virtual void execute() = 0;
+    virtual void execute(std::string &arg) = 0;
 };
 
 // Event Handler Class : Handles Callback
@@ -53,9 +53,9 @@ class EventHandler : public EventHandlerBase
       argument = arg;
     }
 
-    void execute()
+    void execute(std::string &arg)
     {
-      (object->*function) (argument);
+      (object->*function) (arg);
     }
 };
 
@@ -82,11 +82,11 @@ class Event
       count++;
     }
 
-    void execute()
+    void execute(std::string &arg)
     {
       for (EventHandlerMap::iterator it = handlers.begin(); it != handlers.end(); ++it)
       {
-        it->second->execute();
+        it->second->execute(arg);
       }
     }
 
@@ -168,7 +168,7 @@ class EventManager
       return false;
     }
 
-    void execute (string name)
+    void execute (string name, std::string &arg)
     {
       for (vector<EventType>::iterator it = _events.begin(); it != _events.end(); ++it)
       {
@@ -176,7 +176,7 @@ class EventManager
 
         if (e.name.compare (name) == 0)
         {
-          e.event->execute();
+          e.event->execute(arg);
         }
       }
     }

@@ -32,6 +32,9 @@ A::A1::A1()
   printf ("createEvent(-D)\n");
   myEventManager->createEvent ("-D");
 
+  printf ("createEvent(-F)\n");
+  myEventManager->createEvent ("-V");
+
 };
 
 A::A()
@@ -55,6 +58,9 @@ void A::fireEvents()
 
   parameter = "argument eight";
   myEventManager->execute ("-D", parameter);
+
+  parameter = "argument nine";
+  myEventManager->execute ("-V", parameter);
 
   parameter = "argument four";
   myEventManager->execute ("dataitems", parameter);

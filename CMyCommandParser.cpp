@@ -15,13 +15,13 @@ void CMyCommandParser::Help (std::string &arg)
 
 void CMyCommandParser::List (std::string &arg)
 {
-  printf ("CMyCommandParser List invoked w/ arg <%s> using%sfilter %s\n\n", arg.c_str(), ((MyOptionOne.DataItemFilter.empty()) ? " no " : " "), MyOptionOne.DataItemFilter.c_str() );
+  printf ("CMyCommandParser List invoked w/ arg <%s> using%sfilter %s\n\n", arg.c_str(), ( (MyOptionOne.DataItemFilter.empty() ) ? " no " : " "), MyOptionOne.DataItemFilter.c_str() );
   MyOptionOne.DataItemFilter = "";
 }
 
 void CMyCommandParser::DataItems (std::string &arg)
 {
-  printf ("CMyCommandParser DataItems invoked w/ arg <%s> using%sfilter %s\n\n", arg.c_str(), ((MyOptionOne.DataItemFilter.empty()) ? " no " : " "), MyOptionOne.DataItemFilter.c_str() );
+  printf ("CMyCommandParser DataItems invoked w/ arg <%s> using%sfilter %s\n\n", arg.c_str(), ( (MyOptionOne.DataItemFilter.empty() ) ? " no " : " "), MyOptionOne.DataItemFilter.c_str() );
 }
 
 void CMyCommandParser::Request (std::string &arg)
@@ -31,7 +31,10 @@ void CMyCommandParser::Request (std::string &arg)
 
 void CMyCommandParser::Elements (std::string &arg)
 {
-  printf ("CMyCommandParser Elements invoked w/ arg <%s> and verbosity %s\n\n", arg.c_str(), ((MyOptionThree.Verbose) ? "on" : "off") );
+  printf ("CMyCommandParser Elements invoked w/ arg <%s> for%sData Item %s and verbosity %s\n\n", arg.c_str(),
+          ( (MyOptionTwo.DataItem.empty() ) ? " no " : " "), MyOptionTwo.DataItem.c_str(),
+          ( (MyOptionThree.Verbose) ? "on" : "off") );
+
   MyOptionThree.Verbose = false;
 }
 
@@ -66,7 +69,7 @@ void CMyCommandParser::COptionOne::Add()
 {
   printf ("subscribe(-F)\n");
   myEventManager->subscribe ("-F", this, &CMyCommandParser::COptionOne::listenerCOptionOne);
-  
+
   // Set initial (default) value.
   DataItemFilter = "";
 }
@@ -82,7 +85,7 @@ void CMyCommandParser::COptionTwo::Add()
 {
   printf ("subscribe(-D)\n");
   myEventManager->subscribe ("-D", this, &CMyCommandParser::COptionTwo::listenerCOptionTwo);
-  
+
   // Set initial (default) value.
   DataItem = "";
 }
@@ -98,7 +101,7 @@ void CMyCommandParser::COptionThree::Add()
 {
   printf ("subscribe(-V)\n");
   myEventManager->subscribe ("-V", this, &CMyCommandParser::COptionThree::listenerCOptionThree);
-  
+
   // Set initial (default) value.
   Verbose = false;
 }

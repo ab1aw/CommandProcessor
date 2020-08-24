@@ -41,8 +41,6 @@ CInputParser::CInputParser (void)
   }
 
 #endif
-
-  std::cout << "DONE" << std::endl;
 }
 
 const std::string& CInputParser::getCmdOption (const std::string &option) const
@@ -73,21 +71,31 @@ void CInputParser::listCmdOptions (void) const
   // Fire the event and all the subscribed class methods will get called.
   CEventManager *myEventManager = CEventManager::Instance();
 
+  // Iterate through any options first (i.e., those with a '-' and optional argument).
   for (itr = this->tokens.begin(), itr++; itr != this->tokens.end(); itr++)
   {
     std::vector<std::string>::const_iterator command = itr;
 
-    if ( ( (*command).front() == '-') && ((itr+1) != this->tokens.end() ) )
+    if ( ( (*command).front() == '-') && ( (itr + 1) != this->tokens.end() ) && ( (* (itr + 1) ).front() != '-') )
     {
-      myEventManager->execute (*command, (std::string &) *(++itr));
+      myEventManager->execute (*command, (std::string &) * (++itr) );
     }
-    else
+    else if ( (*command).front() == '-' )
     {
       static std::string parameter = "empty argument";
       myEventManager->execute (*command, parameter);
     }
   }
 
+  // Then invoke the subcommand and the command.
   itr = this->tokens.begin();
+
+  if ( (itr + 1) != this->tokens.end() )
+  {
+    myEventManager->execute (* (itr + 1) );
+  }
+
   myEventManager->execute (*itr);
+
+  std::cout << "DONE\n" << std::endl;
 }

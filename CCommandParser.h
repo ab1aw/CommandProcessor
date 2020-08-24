@@ -12,7 +12,10 @@ class CCommandParser
     class CGenericOption
     {
       public:
-        CGenericOption() { myEventManager = CEventManager::Instance(); };
+        CGenericOption()
+        {
+          myEventManager = CEventManager::Instance();
+        };
         virtual ~CGenericOption() {};
         virtual void Add() = 0;
 
@@ -25,7 +28,7 @@ class CCommandParser
 
     virtual void AddOptions (void) = 0;
 
-    CCommandParser() : myEventManager(CEventManager::Instance()) { };
+    CCommandParser() : myEventManager (CEventManager::Instance() ) { };
     virtual ~CCommandParser() {};
 
   protected:

@@ -16,6 +16,7 @@ void CMyCommandParser::Help (std::string &arg)
 void CMyCommandParser::List (std::string &arg)
 {
   printf ("CMyCommandParser List invoked w/ arg <%s> using filter %s\n\n", arg.c_str(), MyCOptionOne.DataItemFilter.c_str() );
+  MyCOptionOne.DataItemFilter = "";
 }
 
 void CMyCommandParser::DataItems (std::string &arg)
@@ -31,6 +32,7 @@ void CMyCommandParser::Request (std::string &arg)
 void CMyCommandParser::Elements (std::string &arg)
 {
   printf ("CMyCommandParser Elements invoked w/ arg <%s> and verbosity %s\n\n", arg.c_str(), ((MyCOptionTwo.Verbose) ? "on" : "off") );
+  MyCOptionTwo.Verbose = false;
 }
 
 void CMyCommandParser::AddOptions (void)

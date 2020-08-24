@@ -18,7 +18,7 @@ class CMyCommandParser : public CCommandParser
         void listenerCOptionOne (std::string &arg);
         void Add();
 
-        std::string DataItemFilter;
+        std::string DataItemFilter = "";
     };
 
 
@@ -30,7 +30,7 @@ class CMyCommandParser : public CCommandParser
         void listenerCOptionTwo (std::string &arg);
         void Add();
 
-        bool Verbose;
+        bool Verbose = false;
     };
 
     virtual void Exit (std::string &arg);

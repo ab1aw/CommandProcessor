@@ -1,4 +1,4 @@
-#include "EventManager.h"
+#include "CEventManager.h"
 #include "CInputParser.h"
 #include "CMyCommandParser.h"
 #include "main.h"
@@ -7,7 +7,7 @@
 A::A1::A1()
 {
   // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
-  EventManager *myEventManager = EventManager::Instance();
+  CEventManager *myEventManager = CEventManager::Instance();
 
   printf ("createEvent(exit)\n");
   myEventManager->createEvent ("exit");
@@ -38,7 +38,7 @@ A::A1::A1()
 A::A()
 {
   // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
-  EventManager *myEventManager = EventManager::Instance();
+  CEventManager *myEventManager = CEventManager::Instance();
   printf ("createEvent(testEvent-CMyCommandParser)\n");
   myEventManager->createEvent ("testEvent-CMyCommandParser");
 }
@@ -46,7 +46,7 @@ A::A()
 void A::fireEvents()
 {
   // Fire the event and all the subscribed class methods will get called.
-  EventManager *myEventManager = EventManager::Instance();
+  CEventManager *myEventManager = CEventManager::Instance();
 
   std::string parameter = "argument one";
   myEventManager->execute ("exit", parameter);
@@ -91,11 +91,11 @@ int main()
     if (input.cmdOptionExists ("-h") || input.cmdOptionExists ("help") )
     {
       // Do stuff
-      std::cout << "list dataitems [-F <filter string>]" << std::endl;
-      std::cout << "list elements -D <data item>" << std::endl;
-      std::cout << "request <data item> -e <element name> -v <value>" << std::endl;
+      std::cout << "\tlist dataitems [-F <filter string>]" << std::endl;
+      std::cout << "\tlist elements -D <data item>" << std::endl;
+      std::cout << "\trequest <data item> -e <element name> -v <value>" << std::endl;
 
-      return -1;
+      continue;
     }
 
     if (input.cmdOptionExists ("exit") )

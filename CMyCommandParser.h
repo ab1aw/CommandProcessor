@@ -2,7 +2,7 @@
 #ifndef CMyCommandParser_h
 #define CMyCommandParser_h
 
-#include "EventManager.h"
+#include "CEventManager.h"
 #include "CCommandParser.h"
 
 
@@ -17,6 +17,8 @@ class CMyCommandParser : public CCommandParser
         virtual ~COptionOne() {};
         void listenerCOptionOne (std::string &arg);
         void Add();
+
+        std::string DataItemFilter;
     };
 
 
@@ -27,6 +29,8 @@ class CMyCommandParser : public CCommandParser
         virtual ~COptionTwo() {};
         void listenerCOptionTwo (std::string &arg);
         void Add();
+
+        bool Verbose;
     };
 
     virtual void Exit (std::string &arg);

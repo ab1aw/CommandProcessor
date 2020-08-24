@@ -2,7 +2,7 @@
 #ifndef main_main_h
 #define main_main_h
 
-#include "EventManager.h"
+#include "CEventManager.h"
 
 class A
 {

@@ -1,6 +1,6 @@
 
 #include "CInputParser.h"
-#include "EventManager.h"
+#include "CEventManager.h"
 
 
 CInputParser::CInputParser (int &argc, char **argv)
@@ -71,7 +71,7 @@ void CInputParser::listCmdOptions (void) const
   std::vector<std::string>::const_iterator itr;
 
   // Fire the event and all the subscribed class methods will get called.
-  EventManager *myEventManager = EventManager::Instance();
+  CEventManager *myEventManager = CEventManager::Instance();
 
   for (itr = this->tokens.begin(), itr++; itr != this->tokens.end(); itr++)
   {

@@ -1,5 +1,5 @@
-EventManager.cpp
-EventManager.h
+CEventManager.cpp
+CEventManager.h
 main.cpp
 main.h
 CCommandParser.cpp

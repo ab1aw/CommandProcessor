@@ -2,7 +2,7 @@
 #ifndef CCommandParser_h
 #define CCommandParser_h
 
-#include "EventManager.h"
+#include "CEventManager.h"
 
 
 class CCommandParser

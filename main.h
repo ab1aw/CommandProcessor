@@ -13,6 +13,9 @@ class A
       public:
         A1();
         virtual ~A1() {};
+
+      protected:
+        CEventManager *myEventManager;
     };
 
     A();
@@ -21,6 +24,9 @@ class A
     void fireEvents();
 
     A1 MyA1;
+
+  protected:
+    CEventManager *myEventManager;
 };
 
 #endif

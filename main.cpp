@@ -6,8 +6,7 @@
 
 A::A1::A1()
 {
-  // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
-  CEventManager *myEventManager = CEventManager::Instance();
+  myEventManager = CEventManager::Instance();
 
   printf ("createEvent(exit)\n");
   myEventManager->createEvent ("exit");
@@ -37,40 +36,37 @@ A::A1::A1()
 
 A::A()
 {
-  // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
-  CEventManager *myEventManager = CEventManager::Instance();
+  myEventManager = CEventManager::Instance();
+
   printf ("createEvent(testEvent-CMyCommandParser)\n");
   myEventManager->createEvent ("testEvent-CMyCommandParser");
 }
 
 void A::fireEvents()
 {
-  // Fire the event and all the subscribed class methods will get called.
-  CEventManager *myEventManager = CEventManager::Instance();
-
   std::string parameter = "argument one";
   myEventManager->execute ("exit", parameter);
 
   parameter = "argument two";
   myEventManager->execute ("help", parameter);
 
-  parameter = "argument three";
-  myEventManager->execute ("list", parameter);
-
-  parameter = "argument four";
-  myEventManager->execute ("dataitems", parameter);
-
-  parameter = "argument five";
-  myEventManager->execute ("request", parameter);
-
-  parameter = "argument six";
-  myEventManager->execute ("elements", parameter);
-
   parameter = "argument seven";
   myEventManager->execute ("-F", parameter);
 
   parameter = "argument eight";
   myEventManager->execute ("-D", parameter);
+
+  parameter = "argument four";
+  myEventManager->execute ("dataitems", parameter);
+
+  parameter = "argument six";
+  myEventManager->execute ("elements", parameter);
+
+  parameter = "argument three";
+  myEventManager->execute ("list", parameter);
+
+  parameter = "argument five";
+  myEventManager->execute ("request", parameter);
 }
 
 
@@ -92,7 +88,7 @@ int main()
     {
       // Do stuff
       std::cout << "\tlist dataitems [-F <filter string>]" << std::endl;
-      std::cout << "\tlist elements -D <data item>" << std::endl;
+      std::cout << "\tlist elements -D <data item> [-V]" << std::endl;
       std::cout << "\trequest <data item> -e <element name> -v <value>" << std::endl;
 
       continue;

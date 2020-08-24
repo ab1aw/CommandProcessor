@@ -77,14 +77,14 @@ void CInputParser::listCmdOptions (void) const
   {
     std::vector<std::string>::const_iterator command = itr;
 
-    if ( ( (*itr).front() == '-') && (++itr != this->tokens.end() ) )
+    if ( ( (*command).front() == '-') && ((itr+1) != this->tokens.end() ) )
     {
-      myEventManager->execute (*command, (std::string &) *itr);
+      myEventManager->execute (*command, (std::string &) *(++itr));
     }
     else
     {
-      std::string parameter = "empty argument";
-      myEventManager->execute (*itr, parameter);
+      static std::string parameter = "empty argument";
+      myEventManager->execute (*command, parameter);
     }
   }
 

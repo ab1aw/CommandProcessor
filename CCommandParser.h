@@ -36,20 +36,13 @@ class CCommandParser
         void Add();
     };
 
-    void Exit (std::string &arg);
-    void Help (std::string &arg);
-    void List (std::string &arg);
-    void DataItems (std::string &arg);
-    void Request (std::string &arg);
-    void Elements (std::string &arg);
+    virtual void Exit (std::string &arg) = 0;
+    virtual void Help (std::string &arg) = 0;
 
-    void AddOptions (void);
+    virtual void AddOptions (void) = 0;
 
-    CCommandParser();
+    CCommandParser() {};
     virtual ~CCommandParser() {};
-
-    COptionOne MyCOptionOne;
-    COptionTwo MyCOptionTwo;
 };
 
 #endif

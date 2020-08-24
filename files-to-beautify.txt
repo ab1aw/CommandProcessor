@@ -6,4 +6,6 @@ CCommandParser.cpp
 CCommandParser.h
 CInputParser.cpp
 CInputParser.h
+CMyCommandParser.cpp
+CMyCommandParser.h
 

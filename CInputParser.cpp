@@ -3,7 +3,6 @@
 #include "EventManager.h"
 
 
-
 CInputParser::CInputParser (int &argc, char **argv)
 {
   this->tokens.clear();
@@ -28,7 +27,6 @@ CInputParser::CInputParser (void)
   while ( ! iss.eof() )
   {
     iss >> firstName;
-    std::cout << "Pushback " << firstName << " length " << firstName.size() << std::endl;
     this->tokens.push_back (firstName);
   }
 
@@ -38,7 +36,6 @@ CInputParser::CInputParser (void)
 
   while (std::cin)
   {
-    std::cout << "Pushback " << b << " length " << b.size() << std::endl;
     this->tokens.push_back (b);
     std::cin >> b;
   }
@@ -73,26 +70,20 @@ void CInputParser::listCmdOptions (void) const
 {
   std::vector<std::string>::const_iterator itr;
 
-  std::cout << "void CInputParser::listCmdOptions (void) const" << std::endl;
-
   // Fire the event and all the subscribed class methods will get called.
   EventManager *myEventManager = EventManager::Instance();
 
   for (itr = this->tokens.begin(), itr++; itr != this->tokens.end(); itr++)
   {
-    std::cout << "Attempt to execute: " << *itr << std::endl;
-
     std::vector<std::string>::const_iterator command = itr;
 
     if ( ( (*itr).front() == '-') && (++itr != this->tokens.end() ) )
     {
-      printf ("myEventManager->execute (%s, %s);\n", (*command).c_str(), (*itr).c_str() );
       myEventManager->execute (*command, (std::string &) *itr);
     }
     else
     {
       std::string parameter = "empty argument";
-      printf ("myEventManager->execute (%s, %s);\n", (*command).c_str(), parameter.c_str() );
       myEventManager->execute (*itr, parameter);
     }
   }

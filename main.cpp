@@ -1,6 +1,6 @@
 #include "EventManager.h"
 #include "CInputParser.h"
-#include "CCommandParser.h"
+#include "CMyCommandParser.h"
 #include "main.h"
 
 
@@ -39,8 +39,8 @@ A::A()
 {
   // Create a event that will be performed.. doesn't need to be in this class can be defined anywhere.
   EventManager *myEventManager = EventManager::Instance();
-  printf ("createEvent(testEvent-CCommandParser)\n");
-  myEventManager->createEvent ("testEvent-CCommandParser");
+  printf ("createEvent(testEvent-CMyCommandParser)\n");
+  myEventManager->createEvent ("testEvent-CMyCommandParser");
 }
 
 void A::fireEvents()
@@ -74,40 +74,10 @@ void A::fireEvents()
 }
 
 
-void CCommandParser::COptionOne::listenerCOptionOne (std::string &arg)
-{
-  printf ("Listener of -F called w/ arg: <%s>\n\n", arg.c_str() );
-}
-
-void CCommandParser::COptionOne::Add()
-{
-  // When testEvent is called the listener method of this class will get called.
-  EventManager *myEventManager = EventManager::Instance();
-
-  printf ("subscribe(-F)\n");
-  myEventManager->subscribe ("-F", this, &CCommandParser::COptionOne::listenerCOptionOne);
-}
-
-
-void CCommandParser::COptionTwo::listenerCOptionTwo (std::string &arg)
-{
-  printf ("Listener of -D called w/ arg: <%s>\n\n", arg.c_str() );
-}
-
-void CCommandParser::COptionTwo::Add()
-{
-  // When testEvent is called the listener method of this class will get called.
-  EventManager *myEventManager = EventManager::Instance();
-
-  printf ("subscribe(-D)\n");
-  myEventManager->subscribe ("-D", this, &CCommandParser::COptionTwo::listenerCOptionTwo);
-}
-
-
 int main()
 {
   A *obj0 = new A;
-  CCommandParser *pCommandParser = new CCommandParser;
+  CMyCommandParser *pCommandParser = new CMyCommandParser;
 
   pCommandParser->AddOptions();
   obj0->fireEvents();
